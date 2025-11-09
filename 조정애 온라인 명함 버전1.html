@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디지털 명함 - 조정애</title>
+    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts 'Inter' --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Inter 폰트를 기본으로 하되, 한글은 Noto Sans KR로 보이도록 설정합니다. */
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+        /* 알림 메시지 숨기기 */
+        #successMessage, #aiErrorMessage {
+            display: none;
+        }
+        /* AI 로딩 스피너 숨기기 */
+        #aiLoader {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <!-- 명함 카드 --><div class="bg-white max-w-lg w-full rounded-2xl shadow-xl overflow-hidden">
+        <div class="p-6 sm:p-8">
+
+            <!-- 1. 프로필 정보 --><header class="flex flex-col items-center text-center mb-6">
+                <img 
+                    class="w-28 h-28 sm:w-32 sm:h-32 rounded-full border-4 border-indigo-100 shadow-md object-cover mb-4" 
+                    src="https://lva-image.s3.us-west-2.amazonaws.com/digital_business_card-image-6.jpeg" 
+                    alt="조정애 하이플래너 프로필"
+                    onerror="this.src='https://placehold.co/128x128/6366f1/white?text=JJA&font=inter'; this.onerror=null;"
+                >
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">조정애</h1>
+                <p class="text-lg sm:text-xl text-indigo-600 font-medium mt-1">현대해상 하이플래너</p>
+            </header>
+
+            <!-- 2. 본인 소개 --><section class="mb-6">
+                <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-3">About Me</h2>
+                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    안녕하세요. 현대해상 통영지점 하이플래너 조정애입니다.
+                    고객님의 삶에 든든한 울타리가 되어드리는 '마음이 합니다'라는 슬로건처럼, 
+                    진심을 다해 최적의 보장 설계를 도와드립니다. 언제든 편하게 연락 주세요.
+                </p>
+            </section>
+
+            <!-- 3. 연락처 --><section class="mb-6">
+                <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-3">Contact</h2>
+                <div class="space-y-3">
+                    <!-- 전화번호 --><a href="tel:010-6329-1805" class="flex items-center group">
+                        <svg class="w-5 h-5 text-indigo-500 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <span class="text-gray-700 group-hover:text-indigo-600 group-hover:underline transition-colors">010-6329-1805</span>
+                    </a>
+                    <!-- 사무실 (T) --><a href="tel:055-650-7501" class="flex items-center group">
+                        <svg class="w-5 h-5 text-indigo-500 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <span class="text-gray-700 group-hover:text-indigo-600 group-hover:underline transition-colors">055-650-7501 (T)</span>
+                    </a>
+                    <!-- 팩스 (F) --><a href="tel:0507-772-6178" target="_blank" rel="noopener noreferrer" class="flex items-center group">
+                        <svg class="w-5 h-5 text-indigo-500 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        <span class="text-gray-700 group-hover:text-indigo-600 group-hover:underline transition-colors">0507-772-6178 (F)</span>
+                    </a>
+                    <!-- 주소 --><a href="https://map.kakao.com/link/search/경상남도 통영시 중앙로 323" target="_blank" rel="noopener noreferrer" class="flex items-start group">
+                        <svg class="w-5 h-5 text-indigo-500 mr-3 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span class="text-gray-700 group-hover:text-indigo-600 group-hover:underline transition-colors leading-snug">
+                            경남 통영시 중앙로 323, 3층 (무전동, 한진빌딩)
+                        </span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 4. 업무 정보 (서비스 또는 기술 스택) --><section class="mb-6">
+                <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-3">주요 업무</h2>
+                <ul class="list-disc list-inside text-gray-600 space-y-2 text-sm sm:text-base">
+                    <li>자동차/운전자 보험 (Hicar)</li>
+                    <li>건강/실손/암 보험 (HiLife)</li>
+                    <li>어린이/태아 보험</li>
+                    <li>연금/저축 보험</li>
+                    <li>화재/재물 보험 및 배상책임 보험</li>
+                </ul>
+            </section>
+
+            <!-- 5. 문의 양식 --><section>
+                <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Contact Form</h2>
+                
+                <!-- 전송 완료 메시지 --><div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
+                    <strong class="font-bold">메시지 전송 완료!</strong>
+                    <span class="block sm:inline"> 빠른 시일 내에 회신드리겠습니다.</span>
+                </div>
+
+                <!-- AI 생성 실패 메시지 --><div id="aiErrorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
+                    <strong class="font-bold">AI 생성 실패!</strong>
+                    <span class="block sm:inline"> 메시지 생성에 실패했습니다. 직접 입력해주세요.</span>
+                </div>
+
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="name" class="sr-only">성함</label>
+                        <input type="text" id="name" name="name" placeholder="성함" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="sr-only">연락처</label>
+                        <input type="tel" id="phone" name="phone" placeholder="전화번호" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+
+                    <!-- AI 제안을 위한 관심 서비스 선택 --><fieldset class="border border-gray-300 rounded-lg p-4">
+                        <legend class="text-sm font-medium text-gray-700 px-2">
+                            관심 서비스 (AI 추천용)
+                        </legend>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+                            <label for="service_car" class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" id="service_car" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                <span>자동차/운전자</span>
+                            </label>
+                            <label for="service_health" class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" id="service_health" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                <span>건강/실손/암</span>
+                            </label>
+                            <label for="service_child" class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" id="service_child" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                <span>어린이/태아</span>
+                            </label>
+                            <label for="service_pension" class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" id="service_pension" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                <span>연금/저축</span>
+                            </label>
+                            <label for="service_fire" class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" id="service_fire" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                <span>화재/재물</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- AI 생성 버튼 --><div class="pt-2">
+                        <button type="button" id="generateQueryBtn" class="w-full flex items-center justify-center bg-purple-600 text-white py-2.5 px-4 rounded-lg font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors disabled:opacity-50">
+                            <!-- AI 로더 (평소엔 숨김) --><svg id="aiLoader" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                            <span>✨ AI로 문의 내용 생성하기</span>
+                        </button>
+                    </div>
+
+                    <div>
+                        <label for="message" class="sr-only">메시지</label>
+                        <textarea id="message" name="message" rows="4" placeholder="문의 내용 (AI로 자동 생성하거나 직접 입력)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white py-2.5 px-4 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
+                            메시지 보내기
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <!-- 푸터 --><footer class="bg-gray-50 p-4 text-center">
+            <p class="text-sm text-gray-500">&copy; 2025 조정애. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // === 기존 스크립트 ===
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            this.reset(); // 폼 초기화
+            // AI 체크박스도 초기화
+            document.getElementById('service_car').checked = false;
+            document.getElementById('service_health').checked = false;
+            document.getElementById('service_child').checked = false;
+            document.getElementById('service_pension').checked = false;
+            document.getElementById('service_fire').checked = false;
+            
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+
+        // === Gemini AI 기능 스크립트 ===
+        const generateBtn = document.getElementById('generateQueryBtn');
+        const messageBox = document.getElementById('message');
+        const aiLoader = document.getElementById('aiLoader');
+        const aiErrorMessage = document.getElementById('aiErrorMessage');
+
+        generateBtn.addEventListener('click', async () => {
+            // 버튼 비활성화 및 로더 표시
+            generateBtn.disabled = true;
+            aiLoader.style.display = 'inline-block';
+            messageBox.value = "AI가 문의 내용을 생성 중입니다. 잠시만 기다려주세요...";
+            aiErrorMessage.style.display = 'none';
+
+            // 1. 선택된 서비스 항목 수집
+            const serviceMap = {
+                'service_car': '자동차/운전자 보험',
+                'service_health': '건강/실손/암 보험',
+                'service_child': '어린이/태아 보험',
+                'service_pension': '연금/저축 보험',
+                'service_fire': '화재/재물 보험'
+            };
+            
+            const selectedServices = [];
+            for (const id in serviceMap) {
+                if (document.getElementById(id).checked) {
+                    selectedServices.push(serviceMap[id]);
+                }
+            }
+
+            // 2. Gemini API에 보낼 프롬프트 구성
+            const systemPrompt = `당신은 현대해상 하이플래너에게 보낼 문의 메시지 초안을 작성하는 AI 비서입니다. 고객이 선택한 관심 항목을 바탕으로, 정중하고 구체적인 2-3문장의 문의 메시지를 한글로 작성해 주세요. 만약 선택한 항목이 없다면, '안녕하세요. 보험 관련해서 상담받고 싶은 내용이 있습니다. 연락 부탁드립니다.'와 같이 일반적인 문의를 작성해 주세요. 고객의 이름과 전화번호는 별도로 전송되므로 본문에 포함하지 마세요.`;
+            
+            let userQuery = "관심 항목: 없음";
+            if (selectedServices.length > 0) {
+                userQuery = "관심 항목: " + selectedServices.join(', ');
+            }
+
+            // 3. Gemini API 호출
+            try {
+                const generatedText = await callGeminiAPI(systemPrompt, userQuery);
+                messageBox.value = generatedText;
+            } catch (error) {
+                console.error("Gemini API call failed:", error);
+                messageBox.value = ""; // 오류 시 텍스트 상자 비우기
+                aiErrorMessage.style.display = 'block'; // 오류 메시지 표시
+                setTimeout(() => {
+                    aiErrorMessage.style.display = 'none';
+                }, 5000);
+            } finally {
+                // 버튼 활성화 및 로더 숨기기
+                generateBtn.disabled = false;
+                aiLoader.style.display = 'none';
+            }
+        });
+
+        // Gemini API 호출 함수 (Exponential Backoff 포함)
+        async function callGeminiAPI(systemPrompt, userQuery, retries = 3, delay = 1000) {
+            const apiKey = ""; // API 키는 비워둡니다. (환경에서 제공됨)
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    // 429 (Too Many Requests) 또는 5xx (Server Error) 등 재시도 가능한 오류
+                    if ((response.status === 429 || response.status >= 500) && retries > 0) {
+                        throw new Error(`Retryable error: ${response.status}`);
+                    }
+                    // 그 외 클라이언트 오류 (400 등)
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0].text) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    // 응답은 왔으나, 예상한 텍스트가 없는 경우
+                    throw new Error("Invalid response structure from API.");
+                }
+
+            } catch (error) {
+                if (error.message.startsWith('Retryable error') && retries > 0) {
+                    // console.log(`Retrying... (${retries} left) after ${delay}ms`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    // 다음 재시도 시 딜레이 증가 (Exponential Backoff)
+                    return callGeminiAPI(systemPrompt, userQuery, retries - 1, delay * 2);
+                } else {
+                    // 재시도 횟수를 초과했거나, 재시도 불가능한 오류
+                    throw error;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
